@@ -22,6 +22,7 @@ CREATE TABLE dbo.Downfall_users
 	(ID_User int primary key not null,
 	Username nvarchar(200) null,
 	Email nvarchar(200) null,
+	Password nvarchar(200) null,
 	mkoin int null,
 	profile_img nvarchar(200) null
 	)
