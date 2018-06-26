@@ -1,7 +1,3 @@
-create DownFall_TheLostCityDB;
-
-use DownFall_TheLostCityDB;
-GO
 
 -- Delete all database data if exists.
 
@@ -12,6 +8,13 @@ END
 -- Create a new database 
 
 CREATE DATABASE DownFall_TheLostCityDB;
+
+-- Use database
+
+
+USE DownFall_TheLostCityDB;
+GO
+
 
 -- Create the users table
 
