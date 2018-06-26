@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="DownFall-SmartFox Server/src"/>
+	<classpathentry kind="lib" path="DownFall-SmartFox Server/lib/client-api/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="DownFall-SmartFox Server/lib/client-api/jdom.jar"/>
+	<classpathentry kind="lib" path="DownFall-SmartFox Server/lib/client-api/netty-3.2.2.Final.jar"/>
+	<classpathentry kind="lib" path="DownFall-SmartFox Server/lib/client-api/SFS2X_API_Java.jar"/>
+	<classpathentry kind="lib" path="DownFall-SmartFox Server/lib/client-api/sfs2x-client-core.jar"/>
+	<classpathentry kind="lib" path="DownFall-SmartFox Server/lib/client-api/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="DownFall-SmartFox Server/lib/client-api/slf4j-simple-1.6.1.jar"/>
+	<classpathentry kind="lib" path="DownFall-SmartFox Server/lib/server-api/sfs2x-core.jar"/>
+	<classpathentry kind="lib" path="DownFall-SmartFox Server/lib/server-api/sfs2x.jar"/>
+	<classpathentry kind="output" path="DownFall-SmartFox Server/bin"/>
+</classpath>

@@ -55,10 +55,10 @@ public class LoginEventHandler extends BaseServerEventHandler {
 			connection = dbManager.getConnection();
 
 			// Build a prepared statement
-			 PreparedStatement stmt = connection.prepareStatement("SELECT users.id_user, username, "
-	        		+ "password, mkoin , profile_img "
-	        		+ "FROM Downfall_users "
-	        		+ "where username='"+userName+"' or email ='"+userName+"'");
+			 PreparedStatement stmt = connection.prepareStatement("SELECT ID_User, Username, "
+	        		+ "Password, Email , mkoin , profile_img "
+	        		+ "FROM [dbo].[Downfall_users] "
+	        		+ "where Username='"+userName+"' or Email ='"+userName+"'");
 	    
                
 
@@ -73,6 +73,9 @@ public class LoginEventHandler extends BaseServerEventHandler {
 
 				String username = res.getString("username");
 				trace(username);
+				
+				String email = res.getString("Email");
+				trace(email);
 
 				String mkoin = res.getString("mkoin");
 				trace(mkoin);
@@ -88,8 +91,9 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				
 				outData.putInt("id_user", id_user);
 				outData.putUtfString("nome_utente", username);
+				outData.putUtfString("email", email);
 				outData.putUtfString("mkoin", mkoin);
-				outData.putUtfString("mkoin", mkoin);
+				outData.putUtfString("profile_img", mkoin);
 				outData.putUtfString(SFSConstants.NEW_LOGIN_NAME, username);
 
 		    }
