@@ -1,10 +1,10 @@
 package mainScreen_package;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Statement;
 
 import com.smartfoxserver.bitswarm.sessions.ISession;
 
@@ -33,43 +33,55 @@ public class LoginEventHandler extends BaseServerEventHandler {
 		// Grab parameters from client request
 		String userName = (String) event.getParameter(SFSEventParam.LOGIN_NAME);
 	    String cryptedPass = (String) event.getParameter(SFSEventParam.LOGIN_PASSWORD);
-		//String email = (String)event.getParameter(SFSEventParam.LOGIN_PASSWORD);
 		ISession session = (ISession) event.getParameter(SFSEventParam.SESSION);
 		trace("Username----------" + userName);
 		trace("Password----------" + cryptedPass);
 		trace("Session----------" + session);
 		
-		 ISFSObject outData = (ISFSObject) event.getParameter(SFSEventParam.LOGIN_OUT_DATA);
-		 // ISFSObject outData2 = (ISFSObject) event.getParameter(SFSEventParam.LOGIN_OUT_DATA);
-		 //User user = null;
-		 // Add data to the object
-		   
+		ISFSObject outData = (ISFSObject) event.getParameter(SFSEventParam.LOGIN_OUT_DATA);
+		
 		
 		// Get password from DB
 		IDBManager dbManager = getParentExtension().getParentZone().getDBManager();
 		Connection connection = null;
 	
 
+		
+		Statement stmt = null; 
+
 		// Grab a connection from the DBManager connection pool
         try {
 			connection = dbManager.getConnection();
 
-			// Build a prepared statement
-			 PreparedStatement stmt = connection.prepareStatement("SELECT ID_User, Username, "
-	        		+ "Password, Email , mkoin , profile_img "
-	        		+ "FROM [dbo].[Downfall_users] "
-	        		+ "where Username='"+userName+"' or Email ='"+userName+"'");
+			/*
+			 * We create a string that contains our query
+			 */
 	    
-               
-
+			 String SQL = "SELECT ID_User, Username," 
+			 + "Password, Email, mkoin, profile_img " 
+					 + "FROM [dbo].[Downfall_users] "
+			 + "where Username = '" + userName + "' or Email = '" + userName + "'";  
+			 
+			 /*
+			  * than we create a statement from connection
+			  */
+	         stmt = connection.createStatement();  
+	         
+	         /*
+	          * This call need to solve forward-only, because if you not set it, the resultset cannot scroll down
+	          */
+	         stmt = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+	        		    ResultSet.CONCUR_READ_ONLY);
+	         
+	         
 		    // Execute query
-		    ResultSet res = stmt.executeQuery();
+		    ResultSet res = stmt.executeQuery(SQL);
 		    
 		    while(res.next())
 			{
 		    	
-		    		int id_user = res.getInt("id_user");
-		    		trace(id_user);
+		    	int id_user = res.getInt("id_user");
+		    	trace(id_user);
 
 				String username = res.getString("username");
 				trace(username);
@@ -77,7 +89,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				String email = res.getString("Email");
 				trace(email);
 
-				String mkoin = res.getString("mkoin");
+				int mkoin = res.getInt("mkoin");
 				trace(mkoin);
 				
 				String profile_img = res.getString("profile_img");
@@ -92,12 +104,11 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				outData.putInt("id_user", id_user);
 				outData.putUtfString("nome_utente", username);
 				outData.putUtfString("email", email);
-				outData.putUtfString("mkoin", mkoin);
-				outData.putUtfString("profile_img", mkoin);
+				outData.putInt("mkoin", mkoin);
+				outData.putUtfString("profile_img", profile_img);
 				outData.putUtfString(SFSConstants.NEW_LOGIN_NAME, username);
 
 		    }
-				
         
 		   // Verify that one record was found
  			if (!res.first())
@@ -105,7 +116,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
  				// This is the part that goes to the client
  				SFSErrorData errData = new SFSErrorData(SFSErrorCode.LOGIN_BAD_USERNAME);
  				errData.addParameter(userName);
-                trace("mi sono intoppato qui???");
+                trace("username not correct error");
  				// Sends response if user gave incorrect user name
  				throw new SFSLoginException("Bad user name: " + userName, errData);
  				
@@ -118,7 +129,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 			// Verify the secure password
 			if (!getApi().checkSecurePassword(session, dbPword, cryptedPass))
 			{
-				trace("mi sono intoppato dopo???");
+				trace("password not correct error");
 				SFSErrorData data = new SFSErrorData(SFSErrorCode.LOGIN_BAD_PASSWORD);
 				data.addParameter(userName);
 				// Sends response if user gave incorrect password
@@ -132,7 +143,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
         {
         	SFSErrorData errData = new SFSErrorData(SFSErrorCode.GENERIC_ERROR);
         	errData.addParameter("SQL Error: " + e.getMessage());
-        	trace(" mi sono intoppato quiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii???");
+        	trace("Sql server error response, print stacktrace");
         	// Sends response about mysql errors
         	throw new SFSLoginException("A SQL Error occurred: " + e.getMessage(), errData);
         }
