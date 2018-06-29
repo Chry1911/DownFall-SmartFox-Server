@@ -51,21 +51,22 @@ GO
 -- to return from the server to the client the list of all avatars of the game
 -- then users can choose their avatars and then register the list of all users_avatars.
 
+
+create Table dbo.Downfall_avatar_hairs
+	(Id_hair int primary key not null,
+		id_type int null,
+		description nvarchar(100) null
+	)
+GO
+
 create Table dbo.Downfall_avatars
 	(   ID_avatar int primary key not null,
-		type int null,
+		id_type int null,
 		colorskin nvarchar(50) null,
 		hair_type int null,
 		description nvarchar(50) null,
 		CONSTRAINT FK_hair_type FOREIGN KEY(hair_type)
-		REFERENCES Downfall_avatar_hairs(type)
-	)
-GO
-
-create Table dbo.Downfall_avatar_hairs
-	(Id_hair int primary key not null,
-		type int null,
-		description nvarchar(100) null
+		REFERENCES Downfall_avatar_hairs(ID_hair)
 	)
 GO
 
@@ -74,7 +75,7 @@ create Table dbo.Downfall_users_avatars
 	(Id int primary key not null,
 		id_user int not null,
 		id_avatar int not null,
-		CONSTRAINT FK_id_user FOREIGN KEY(id_user)
+		CONSTRAINT FK_id_user_users FOREIGN KEY(id_user)
 		REFERENCES Downfall_users(ID_User),
 		CONSTRAINT FK_id_avatar FOREIGN KEY(id_avatar)
 		REFERENCES Downfall_avatars(ID_avatar)
