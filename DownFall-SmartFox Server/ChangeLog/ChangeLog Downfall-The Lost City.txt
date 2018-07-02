@@ -1,0 +1,63 @@
+ChangeLog Downfall-The Lost City
+
+02-07-2018
+
+Client-side
+----------------------------------------------------------------------------------------------------------
+Creato il building player(EXE di lancio) con integrazione a smartfox server
+connessione in localhost 127.0.0.1 
+-------
+Sistemata la cutscene del video, su risoluzione 1440 x 900 si vedeva tagliato orizzontalmente
+-------
+Su Login Page, creata la connessione a smartfox server
+Esegue correttamente la login, utilizza le informazioni di risposta
+per stamparle nelle scene seguenti.
+-------
+In caso di errore delle credenziali, stampata messaggio d'errore a video con tasto restart lobby.
+-------
+In caso di perdita di connessione al server, stampato messaggio d'errore a video con tasto restart lobby.
+-------
+Sistemati i vari menu d'esecuzione delle funzioni.
+-------
+Su customization page creata la griglia vuota degli indumenti, creato lo script di per giocare con i vari
+menu presenti su questa pagina, inseriti i volti femminili(che vanno ridimensionati e ottimizzati),
+mancano i volti maschili, e tutti i tipi di capelli.
+
+----------------------------------------------------------------------------------------------------------
+Fine Client-side 
+
+
+
+
+Server-side
+----------------------------------------------------------------------------------------------------------
+Creato il database come su script su github.
+C'è da rivedere qualche relazione ER visto che ora non appena pronti ci sarà da lavorare con i modelli 3D.
+-------
+Login Extension, funziona tutto perfettamente, interroga il db senza problemi, e sopratutto restituisce
+al client le informazioni necessarie per popolare i dati sulla User interface, e sposta gli utenti connessi
+nella room della lobby.
+-----------------------------------------------------------------------------------------------------------
+Fine Server-side
+
+
+
+Grafica-side
+-----------------------------------------------------------------------------------------------------------
+Creati alcuni modelli, da testare in fase di movimento su scena mappa di unity.
+-----------------------------------------------------------------------------------------------------------
+Fine Grafica-side
+
+
+
+
+
+Cose da fare........
+- creare immagini di tutti i tizi maschili e femminili.
+- creare immagini di tutti i tagli di capelli possibili.
+- creare modelli 3D di ogni tizio selezionabile in foto. (come su pubg).
+- cercare le associazioni corrette nel db per associare ad ogni player i vestiti guadagnati in game, e come
+  associarli agli avatars in uso.
+- pubblicare il server per far connettere i tester almeno nella fase di login.
+- associare un avatar di default da poter personalizzare Free solo la prima volta.
+
