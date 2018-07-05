@@ -58,7 +58,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 			 */
 	    
 			 String SQL = "SELECT ID_User, Username," 
-			 + "Password, Email, mkoin, profile_img " 
+			 + "Password, Email, mkoin, profile_img, first_access " 
 					 + "FROM [dbo].[Downfall_users] "
 			 + "where Username = '" + userName + "' or Email = '" + userName + "'";  
 			 
@@ -99,13 +99,17 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				}
 				trace(profile_img);
 				
+				boolean  first_access = res.getBoolean("first_access");
+				trace(first_access);
+				
 				
 				
 				outData.putInt("id_user", id_user);
-				outData.putUtfString("nome_utente", username);
+				outData.putUtfString("username", username);
 				outData.putUtfString("email", email);
 				outData.putInt("mkoin", mkoin);
 				outData.putUtfString("profile_img", profile_img);
+				outData.putBool("firstaccess", first_access);
 				outData.putUtfString(SFSConstants.NEW_LOGIN_NAME, username);
 
 		    }
