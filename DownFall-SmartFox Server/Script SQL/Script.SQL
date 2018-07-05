@@ -24,7 +24,8 @@ CREATE TABLE dbo.Downfall_users
 	Email nvarchar(200) null,
 	Password nvarchar(200) null,
 	mkoin int null,
-	profile_img nvarchar(200) null
+	profile_img nvarchar(200) null,
+	first_access bit null
 	)
 GO
 
@@ -55,9 +56,11 @@ GO
 create Table dbo.Downfall_avatar_hairs
 	(Id_hair int primary key not null,
 		id_type int null,
-		description nvarchar(100) null
+		description nvarchar(100) null,
 	)
 GO
+
+-- Genereting random avatar on first access and assign it to user.
 
 create Table dbo.Downfall_avatars
 	(   ID_avatar int primary key not null,
@@ -65,10 +68,14 @@ create Table dbo.Downfall_avatars
 		colorskin nvarchar(50) null,
 		hair_type int null,
 		description nvarchar(50) null,
+		sex_type nvarchar(50) null,
 		CONSTRAINT FK_hair_type FOREIGN KEY(hair_type)
 		REFERENCES Downfall_avatar_hairs(ID_hair)
 	)
 GO
+
+
+-- Remember to insert in the table avatars type and avatars hair
 
 
 create Table dbo.Downfall_users_avatars
