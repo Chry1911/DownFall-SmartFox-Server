@@ -58,8 +58,10 @@ public class LoginEventHandler extends BaseServerEventHandler {
 			 */
 	    
 			 String SQL = "SELECT ID_User, Username," 
-			 + "Password, Email, mkoin, profile_img, first_access " 
+			 + "Password, Email, mkoin, profile_img, first_access, id_avatar " 
 					 + "FROM [dbo].[Downfall_users] "
+			 + "INNER JOIN [dbo.Downfall_users_avatars] on [dbo].[Downfall_users].ID_User = "
+					 + "[dbo].[Downfall_users_avatars].id_user "
 			 + "where Username = '" + userName + "' or Email = '" + userName + "'";  
 			 
 			 /*
@@ -76,12 +78,13 @@ public class LoginEventHandler extends BaseServerEventHandler {
 	         
 		    // Execute query
 		    ResultSet res = stmt.executeQuery(SQL);
+		    int type_avatar;
 		    
 		    while(res.next())
 			{
 		    	
-		    	int id_user = res.getInt("id_user");
-		    	trace(id_user);
+		    		int id_user = res.getInt("id_user");
+		    		trace(id_user);
 
 				String username = res.getString("username");
 				trace(username);
@@ -103,6 +106,35 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				trace(first_access);
 				
 				
+				if(first_access = true) {
+					trace("non creiamo nessun personaggio random");
+				}else {
+					/*
+					 * if false, setting the field to true with query then return the random png.
+					 */
+					String query_update = "UPDATE [dbo].[Downfall_users] SET first_access = 1";
+					Statement stmt2 = connection.createStatement();
+					stmt2 = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+		        		    ResultSet.CONCUR_READ_ONLY);
+					stmt2.executeQuery(query_update);
+					
+					trace("print update queries" + query_update);
+					
+					type_avatar = (int)(Math.random() * 15);
+					String query_insert = "INSERT INTO [dbo].[Downfall_users_avatars]([id_user], [id_avatar] " +
+					"values (" + id_user + "," + type_avatar + ")";
+					Statement stmt3 = connection.createStatement();
+					stmt3 = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+		        		    ResultSet.CONCUR_READ_ONLY);
+					stmt3.executeQuery(query_insert);
+					
+					trace("print insert query" + query_insert);
+					
+				}
+				
+				type_avatar = res.getInt("id_avatar");
+				trace(type_avatar);
+				
 				
 				outData.putInt("id_user", id_user);
 				outData.putUtfString("username", username);
@@ -110,6 +142,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				outData.putInt("mkoin", mkoin);
 				outData.putUtfString("profile_img", profile_img);
 				outData.putBool("firstaccess", first_access);
+				outData.putInt("avatar", type_avatar);
 				outData.putUtfString(SFSConstants.NEW_LOGIN_NAME, username);
 
 		    }
