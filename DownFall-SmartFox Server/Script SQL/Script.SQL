@@ -1,4 +1,3 @@
-
 -- Delete all database data if exists.
 
 BEGIN
@@ -19,7 +18,7 @@ GO
 -- Create the users table
 
 CREATE TABLE dbo.Downfall_users
-	(ID_User int primary key not null,
+	(ID_User int IDENTITY(1,1) primary key,
 	Username nvarchar(200) null,
 	Email nvarchar(200) null,
 	Password nvarchar(200) null,
@@ -31,7 +30,7 @@ GO
 
 
 CREATE TABLE dbo.Downfall_TypeClothes
-	(Id_clothes int primary key not null,
+	(Id_clothes int IDENTITY(1,1) primary key,
 	type_clothes nvarchar(200) null,
 	descr_clothes nvarchar(200) null
 	)
@@ -39,7 +38,7 @@ GO
 
 
 create Table dbo.DownFall_UserClothes
-	(ID int primary key not null,
+	(ID int IDENTITY(1,1) primary key,
 	 id_user int not null,
 	 list_clothes int null,
 	 CONSTRAINT FK_id_user FOREIGN KEY (id_user) 
@@ -54,7 +53,7 @@ GO
 
 
 create Table dbo.Downfall_avatar_hairs
-	(Id_hair int primary key not null,
+	(Id_hair int IDENTITY(1,1) primary key,
 		id_type int null,
 		description nvarchar(100) null,
 	)
@@ -63,7 +62,7 @@ GO
 -- Genereting random avatar on first access and assign it to user.
 
 create Table dbo.Downfall_avatars
-	(   ID_avatar int primary key not null,
+	(   ID_avatar int IDENTITY(1,1) primary key,
 		id_type int null,
 		colorskin nvarchar(50) null,
 		hair_type int null,
@@ -79,7 +78,7 @@ GO
 
 
 create Table dbo.Downfall_users_avatars
-	(Id int primary key not null,
+	(Id int IDENTITY(1,1) primary key,
 		id_user int not null,
 		id_avatar int not null,
 		CONSTRAINT FK_id_user_users FOREIGN KEY(id_user)
@@ -88,6 +87,3 @@ create Table dbo.Downfall_users_avatars
 		REFERENCES Downfall_avatars(ID_avatar)
 	)
 GO
-
-
-
