@@ -57,12 +57,10 @@ public class LoginEventHandler extends BaseServerEventHandler {
 			 * We create a string that contains our query
 			 */
 	    
-			 String SQL = "SELECT ID_User, Username," 
-			 + "Password, Email, mkoin, profile_img, first_access, id_avatar " 
-					 + "FROM [dbo].[Downfall_users] "
-			 + "INNER JOIN [dbo.Downfall_users_avatars] on [dbo].[Downfall_users].ID_User = "
-					 + "[dbo].[Downfall_users_avatars].id_user "
-			 + "where Username = '" + userName + "' or Email = '" + userName + "'";  
+			String SQL = "SELECT [dbo].[Downfall_users].ID_User, Username," 
+		             + "Password, Email, mkoin, profile_img, first_access, id_avatar " 
+		                     + "FROM [dbo].[Downfall_users] LEFT JOIN [dbo].[Downfall_users_avatars] ON  [dbo].[Downfall_users].ID_User = [dbo].[Downfall_users_avatars].id_user "
+		             + "WHERE [dbo].[Downfall_users].Username = '" + userName + "' OR [dbo].[Downfall_users].Email = '" + userName + "'";  
 			 
 			 /*
 			  * than we create a statement from connection
