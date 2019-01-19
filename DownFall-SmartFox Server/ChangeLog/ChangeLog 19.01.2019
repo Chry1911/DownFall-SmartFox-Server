@@ -1,0 +1,14 @@
+ChangeLog 19.01.2019
+
+in data odierna abbiamo deciso di utilizzare la versione 2017.1.4 di Unity
+
+abbiamo reimportato tutto il progetto e ritestato il tutto.
+
+Su Smartfox Server occorre attivare la connessione al DB nella Zona Downfall_The_Lost_City_Zone.
+
+Dopo di che su Unity prima di lanciare il progetto occorre aprire lo script richiamato nella scena0 sul Login Button e settare la variabile
+SceneIndex = 1;
+
+Prima di eseguire e startare il tutto occorre andare su MenuFile ed inserire nella Build la Scena0, Scena1, Scena2 e poi 
+salvare.
+Ora si può startare la prova di smartfox con sincronizzazione client-server.
