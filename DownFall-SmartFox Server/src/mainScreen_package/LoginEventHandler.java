@@ -104,7 +104,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				trace(first_access);
 				
 				
-				if(first_access = true) {
+				if(first_access == true) {
 					trace("non creiamo nessun personaggio random");
 				}else {
 					/*
@@ -114,12 +114,12 @@ public class LoginEventHandler extends BaseServerEventHandler {
 					Statement stmt2 = connection.createStatement();
 					stmt2 = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 		        		    ResultSet.CONCUR_READ_ONLY);
-					stmt2.executeQuery(query_update);
+					stmt2.executeUpdate(query_update);
 					
 					trace("print update queries" + query_update);
 					
 					type_avatar = (int)(Math.random() * 15);
-					String query_insert = "INSERT INTO [dbo].[Downfall_users_avatars]([id_user], [id_avatar] " +
+					String query_insert = "INSERT INTO [dbo].[Downfall_users_avatars]([id_user], [id_avatar])" +
 					"values (" + id_user + "," + type_avatar + ")";
 					Statement stmt3 = connection.createStatement();
 					stmt3 = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
