@@ -119,7 +119,11 @@ public class LoginEventHandler extends BaseServerEventHandler {
 					trace("print update queries" + query_update);
 					
 					type_avatar = (int)(Math.random() * 15);
+<<<<<<< Updated upstream
 					String query_insert = "INSERT INTO [dbo].[Downfall_users_avatars]([id_user], [id_avatar])" +
+=======
+					String query_insert = "INSERT INTO [dbo].[Downfall_users_avatars]([id_user], [id_avatar] )" +
+>>>>>>> Stashed changes
 					"values (" + id_user + "," + type_avatar + ")";
 					Statement stmt3 = connection.createStatement();
 					stmt3 = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
