@@ -10,6 +10,10 @@ public class LoginExtension extends SFSExtension{
 		trace("Hello everybody... this is the first extension of DownFall - The Lost City");
 		trace("This Extension work to do Login Procedure from DB(SQL Server)");
 		addEventHandler(SFSEventType.USER_LOGIN, LoginEventHandler.class);
+		/*
+		 * Qui facciamo le chiamate per far si che lo user possa richiedere al server le cose
+		 */
+		addRequestHandler("Inventory", CustomizationEventHandler.class);
 	}
 	
 	public void onDestroy() {
