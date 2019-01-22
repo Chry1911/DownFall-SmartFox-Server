@@ -41,6 +41,10 @@ INSERT INTO Downfall_TypeClothes([type_clothes], [descr_clothes]) values ('White
 INSERT INTO Downfall_TypeClothes([type_clothes], [descr_clothes]) values ('Orange Skirt', 'Standard Orange Skirt');
 
 
+INSERT INTO Downfall_avatar_hairs([id_type], [description]) values (1, 'long blonde hair');
+INSERT INTO Downfall_avatar_hairs([id_type], [description]) values (2, 'long brown hair');
+INSERT INTO Downfall_avatar_hairs([id_type], [description]) values (3, 'short brown hair');
+INSERT INTO Downfall_avatar_hairs([id_type], [description]) values (4, 'short blonde hair');
 
 
 
