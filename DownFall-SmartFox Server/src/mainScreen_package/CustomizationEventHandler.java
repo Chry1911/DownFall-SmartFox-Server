@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import com.smartfoxserver.v2.db.IDBManager;
 import com.smartfoxserver.v2.entities.User;
+import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSObject;
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
@@ -23,6 +24,9 @@ public class CustomizationEventHandler extends BaseClientRequestHandler {
 		/*
 		 * qua andranno inizializzate le variabili che il client manda per tornare poi il result set
 		 */
+		String username = params.getUtfString("username");
+		int avatar_id = params.getInt("id_avatar");
+		
 		
 		try {
 			trace("I'm entered in the first try catch of my code to retruns my invenctory");
@@ -30,6 +34,25 @@ public class CustomizationEventHandler extends BaseClientRequestHandler {
 			 * Prendiamo la classica connessione da db per poter eseguire le query
 			 */
 			connection = dbmanager.getConnection();
+			/*
+			 * pattern per chiamare una query restituendo l'array di oggetto al client
+			 */
+			ISFSArray arr = dbmanager.executeQuery("SELECT QUALCOSA FROM QUALCOSA where username = ? "
+					+ "and id_avatar = ? ", new Object[] {username, avatar_id});
+			
+			if(arr.size() > 0) {
+				  SFSObject result = new SFSObject();
+				  result.putSFSArray("success", arr);
+				  send("Inventory", result, user);
+			}
+			else{
+			      SFSObject result2 = new SFSObject();
+				  result2.putUtfString("nosuccess", "The users doesn't have no items in his Inventory");
+				  send("Inventory", result2, user);
+			}
+			
+			
+			
 			
 			
 		}catch (SQLException e) {
