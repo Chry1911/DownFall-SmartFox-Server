@@ -25,11 +25,11 @@ INSERT INTO Downfall_users ([Username], [Email], [Password], [mkoin], [profile_i
 
 
 
-INSERT INTO Downfall_avatars([id_type], [color_skin], [hair_type], [description], [sex_type]) VALUES (1, 'White Caucasic', 1, 'Standard White Caucasic Man', 'Male');
-INSERT INTO Downfall_avatars([id_type], [color_skin], [hair_type], [description], [sex_type]) VALUES (2, 'Black Skin', 2, 'Standard Black Man', 'Male');
-INSERT INTO Downfall_avatars([id_type], [color_skin], [hair_type], [description], [sex_type]) VALUES (3, 'Yellow Asian Skin', 3, 'Standard Asiatic Man', 'Male');
-INSERT INTO Downfall_avatars([id_type], [color_skin], [hair_type], [description], [sex_type]) VALUES (4, 'White Caucasic', 4, 'Standard White Caucasic Woman', 'Female');
-INSERT INTO Downfall_avatars([id_type], [color_skin], [hair_type], [description], [sex_type]) VALUES (5, 'White Caucasic', 5, 'Standard White Caucasic Woman', 'Female');
+INSERT INTO Downfall_avatars([id_type], [colorskin], [hair_type], [description], [sex_type]) VALUES (1, 'White Caucasic', 1, 'Standard White Caucasic Man', 'Male');
+INSERT INTO Downfall_avatars([id_type], [colorskin], [hair_type], [description], [sex_type]) VALUES (2, 'Black Skin', 2, 'Standard Black Man', 'Male');
+INSERT INTO Downfall_avatars([id_type], [colorskin], [hair_type], [description], [sex_type]) VALUES (3, 'Yellow Asian Skin', 3, 'Standard Asiatic Man', 'Male');
+INSERT INTO Downfall_avatars([id_type], [colorskin], [hair_type], [description], [sex_type]) VALUES (4, 'White Caucasic', 4, 'Standard White Caucasic Woman', 'Female');
+INSERT INTO Downfall_avatars([id_type], [colorskin], [hair_type], [description], [sex_type]) VALUES (5, 'White Caucasic', 5, 'Standard White Caucasic Woman', 'Female');
 
 
 INSERT INTO Downfall_TypeClothes([type_clothes], [descr_clothes]) values ('Yellow Skirt', 'Standard Yellow Skirt');
